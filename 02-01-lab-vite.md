@@ -19,10 +19,10 @@ Al terminar tendrás un proyecto **React + TypeScript** creado con Vite, el serv
 
 ## Archivos implicados
 
-| Acción | Ruta |
-|--------|------|
+| Acción    | Ruta                                         |
+| --------- | -------------------------------------------- |
 | Crea Vite | `package.json`, `index.html`, `src/main.tsx` |
-| Editas | `src/App.tsx` |
+| Editas    | `src/App.tsx`                                |
 
 ## Resultado esperado
 
@@ -71,7 +71,7 @@ npm run dev
 2. Ábrela en el navegador.
 3. Deberías ver la pantalla por defecto de Vite + React.
 
-**Comprobación:** la página carga sin error en consola del navegador (F12 → pestaña *Console*).
+**Comprobación:** la página carga sin error en consola del navegador (F12 → pestaña _Console_).
 
 ---
 
@@ -82,16 +82,16 @@ npm run dev
 Abre el archivo **`src/main.tsx`**. Debe coincidir con:
 
 ```tsx
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
   </StrictMode>,
-)
+);
 ```
 
 - `getElementById('root')` enlaza con `<motion.div id="root">` en `index.html`.
@@ -114,10 +114,10 @@ function App() {
       <h1>React + TypeScript + Vite</h1>
       <p>Si ves este texto, el lab 2.1 está correcto.</p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 Guarda el archivo **sin detener** `npm run dev`.
@@ -148,22 +148,27 @@ Abre la URL que indique `preview` (a menudo `http://localhost:4173`).
 
 ## Si algo falla
 
-| Síntoma | Qué revisar |
-|---------|-------------|
-| `npm: command not found` | Instala Node.js LTS desde [nodejs.org](https://nodejs.org). |
-| Puerto distinto a 5173 | Usa la URL exacta que imprime Vite en la terminal. |
-| Pantalla en blanco | F12 → Console; suele haber error de sintaxis en `App.tsx`. |
+| Síntoma                          | Qué revisar                                                               |
+| -------------------------------- | ------------------------------------------------------------------------- |
+| `npm: command not found`         | Instala Node.js LTS desde [nodejs.org](https://nodejs.org).               |
+| Puerto distinto a 5173           | Usa la URL exacta que imprime Vite en la terminal.                        |
+| Pantalla en blanco               | F12 → Console; suele haber error de sintaxis en `App.tsx`.                |
 | `getElementById('root')` es null | `index.html` debe tener `<motion.div id="root">` → usa `<div id="root">`. |
 
 ---
 
 ## Retos
 
-| Reto | Enunciado |
-|------|-----------|
-| A | Añade en `App.tsx` un segundo párrafo con tu nombre. Guarda y verifica HMR.
+| Reto | Enunciado                                                                   |
+| ---- | --------------------------------------------------------------------------- |
+| A    | Añade en `App.tsx` un segundo párrafo con tu nombre. Guarda y verifica HMR. |
+
 2. **Reto B:** Ejecuta `npm run build` otra vez tras el cambio y confirma que `dist/` refleja el texto nuevo.
 3. **Reto C:** En `package.json`, localiza los scripts `dev`, `build` y `preview` y anota en una línea qué hace cada uno.
+
+- dev: llama a vite para que se inicie el servidor
+- build: primero compila typescript y a continuación hace que se haga build de vite generando un paquete con todo lo necesario para desplegar la app
+- preview: es parecido a dev pero en este caso muestra lo compilado por build. No se cambia lo mostrado a no ser que hagas un build.
 
 ---
 
