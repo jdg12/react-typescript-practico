@@ -1,17 +1,16 @@
 import { Tarjeta } from "./Tarjeta";
-
-export type Producto = { id: number; nombre: string; precio: number };
+import type { Producto } from "../types/producto";
 
 type ListaProductosProps = {
-  productos: Producto[];
+  items: Producto[];
 };
 
-export function ListaProductos({ productos }: ListaProductosProps) {
+export function ListaProductos({ items }: ListaProductosProps) {
   return (
-    <div className="grid">
-      {productos.map((p) => (
-        <Tarjeta key={p.id} titulo={p.nombre}>
-          <p>{p.precio.toFixed(2)} €</p>
+    <div>
+      {items.map((producto) => (
+        <Tarjeta key={producto.id} titulo={producto.nombre}>
+          <p>Precio: {producto.precio.toFixed(2)} €</p>
         </Tarjeta>
       ))}
     </div>

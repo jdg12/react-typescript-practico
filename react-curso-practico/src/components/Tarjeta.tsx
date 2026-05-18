@@ -1,13 +1,17 @@
+import type { ReactNode } from "react";
+
 type TarjetaProps = {
-  titulo: string;
-  children: React.ReactNode;
+  children: ReactNode;
+  titulo?: string;
+  pie?: ReactNode;
 };
 
-export function Tarjeta({ titulo, children }: TarjetaProps) {
+export function Tarjeta({ children, titulo, pie }: TarjetaProps) {
   return (
-    <article className="tarjeta">
-      <h3>{titulo}</h3>
+    <div className="tarjeta">
+      {titulo ? <h3 style={{ marginTop: 0 }}>{titulo}</h3> : null}
       {children}
-    </article>
+      {pie}
+    </div>
   );
 }
