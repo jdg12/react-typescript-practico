@@ -1,15 +1,16 @@
-import noticias from "./data/noticias.json";
-import { Noticia } from "./components/Noticia";
+import { ListaProductos } from "./components/ListaProductos";
+
+const productos = [
+  { id: 1, nombre: "Teclado", precio: 49.9 },
+  { id: 2, nombre: "Ratón", precio: 24.5 },
+];
 
 function App() {
   return (
-    <div>
-      <h1>Noticias</h1>
-      {noticias.length === 0 && <p>No hay noticias publicadas.</p>}
-      {noticias.map((noticia) => (
-        <Noticia key={noticia.id} noticia={noticia} />
-      ))}
-    </div>
+    <main>
+      <h1>Tienda demo</h1>
+      <ListaProductos productos={productos} />
+    </main>
   );
 }
 
