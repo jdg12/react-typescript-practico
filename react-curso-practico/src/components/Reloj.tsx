@@ -22,7 +22,7 @@ export function Reloj() {
     return () => {
       window.clearInterval(id);
     };
-  });
+  }, []);
 
   return (
     <div>
