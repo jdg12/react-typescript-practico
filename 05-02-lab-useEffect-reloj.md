@@ -32,20 +32,20 @@ Un reloj digital (`HH:MM:SS`) que avanza cada segundo. Si desmontas el component
 Crea **`src/components/Reloj.tsx`**:
 
 ```tsx
-import { useState } from 'react'
+import { useState } from "react";
 
 function formatearHora(fecha: Date): string {
-  return fecha.toLocaleTimeString('es-ES', { hour12: false })
+  return fecha.toLocaleTimeString("es-ES", { hour12: false });
 }
 
 export function Reloj() {
-  const [hora, setHora] = useState(() => formatearHora(new Date()))
+  const [hora, setHora] = useState(() => formatearHora(new Date()));
 
   return (
     <div>
       <p>Hora: {hora}</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -60,30 +60,30 @@ export function Reloj() {
 Añade el import y el efecto en **`src/components/Reloj.tsx`**:
 
 ```tsx
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 function formatearHora(fecha: Date): string {
-  return fecha.toLocaleTimeString('es-ES', { hour12: false })
+  return fecha.toLocaleTimeString("es-ES", { hour12: false });
 }
 
 export function Reloj() {
-  const [hora, setHora] = useState(() => formatearHora(new Date()))
+  const [hora, setHora] = useState(() => formatearHora(new Date()));
 
   useEffect(() => {
     const id = window.setInterval(() => {
-      setHora(formatearHora(new Date()))
-    }, 1000)
+      setHora(formatearHora(new Date()));
+    }, 1000);
 
     return () => {
-      window.clearInterval(id)
-    }
-  }, [])
+      window.clearInterval(id);
+    };
+  }, []);
 
   return (
     <div>
       <p>Hora: {hora}</p>
     </div>
-  )
+  );
 }
 ```
 
@@ -101,7 +101,7 @@ export function Reloj() {
 Sustituye **`src/App.tsx`** por:
 
 ```tsx
-import { Reloj } from './components/Reloj'
+import { Reloj } from "./components/Reloj";
 
 function App() {
   return (
@@ -109,10 +109,10 @@ function App() {
       <h1>Reloj con useEffect</h1>
       <Reloj />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 **Comprobación:** título + hora en vivo.
@@ -126,24 +126,24 @@ export default App
 Añade en `App` un estado para mostrar u ocultar el reloj:
 
 ```tsx
-import { useState } from 'react'
-import { Reloj } from './components/Reloj'
+import { useState } from "react";
+import { Reloj } from "./components/Reloj";
 
 function App() {
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(true);
 
   return (
     <div>
       <h1>Reloj con useEffect</h1>
       <button type="button" onClick={() => setVisible((v) => !v)}>
-        {visible ? 'Ocultar' : 'Mostrar'} reloj
+        {visible ? "Ocultar" : "Mostrar"} reloj
       </button>
       {visible ? <Reloj /> : <p>Reloj desmontado</p>}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 Abre la consola, pon un `console.log` temporal dentro del efecto y otro en la limpieza. Oculta el reloj: debe ejecutarse la limpieza.
@@ -154,17 +154,18 @@ Abre la consola, pon un `console.log` temporal dentro del efecto y otro en la li
 
 ## Si algo falla
 
-| Síntoma | Qué revisar |
-|---------|-------------|
-| La hora no avanza | ¿Olvidaste `[]` como segundo argumento de `useEffect`? |
-| Warning de memory leak | Añade `return () => clearInterval(id)` en el efecto. |
-| Hora incorrecta | `toLocaleTimeString('es-ES', { hour12: false })`. |
+| Síntoma                | Qué revisar                                            |
+| ---------------------- | ------------------------------------------------------ |
+| La hora no avanza      | ¿Olvidaste `[]` como segundo argumento de `useEffect`? |
+| Warning de memory leak | Añade `return () => clearInterval(id)` en el efecto.   |
+| Hora incorrecta        | `toLocaleTimeString('es-ES', { hour12: false })`.      |
 
 ## Retos
 
 1. **Reto A:** Muestra también la fecha (`toLocaleDateString`).
 2. **Reto B:** Cambia el intervalo a 500 ms y observa el comportamiento.
 3. **Reto C:** ¿Qué pasaría si omitieras el array `[]`? Prueba y anota en una frase.
+   Si lo quitase lo que pasaría es que cada vez que se refresca la interfaz, cada segundo en este caso, se crearía un nuevo contador que haría lo mismo, por lo que cada vez iría más rápido y consumiendo más
 
 ---
 
