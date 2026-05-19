@@ -1,16 +1,10 @@
-import { ListaProductos } from "./components/ListaProductos";
-import { productos } from "./data/productos";
-import type { Producto } from "./types/producto";
+import { Contador } from "./components/Contador";
 
 function App() {
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Catálogo</h1>
-      <ListaProductos
-        items={productos.sort((p1: Producto, p2: Producto) => {
-          return p2.precio - p1.precio;
-        })}
-      />
+    <div>
+      <h1>useState</h1>
+      <Contador />
     </div>
   );
 }
