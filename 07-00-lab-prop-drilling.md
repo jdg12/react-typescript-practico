@@ -14,11 +14,11 @@ Visualizar el **prop drilling**: pasar `mensaje` y `onAccion` por un componente 
 
 ## Archivos
 
-| Archivo | Acción |
-|---------|--------|
-| `src/components/PanelAccion.tsx` | Crear |
-| `src/components/LayoutIntermedio.tsx` | Crear |
-| `src/App.tsx` | Modificar |
+| Archivo                               | Acción    |
+| ------------------------------------- | --------- |
+| `src/components/PanelAccion.tsx`      | Crear     |
+| `src/components/LayoutIntermedio.tsx` | Crear     |
+| `src/App.tsx`                         | Modificar |
 
 ## Prerrequisitos
 
@@ -39,17 +39,19 @@ Crea **`src/components/PanelAccion.tsx`**:
 
 ```tsx
 type PanelAccionProps = {
-  mensaje: string
-  onAccion: () => void
-}
+  mensaje: string;
+  onAccion: () => void;
+};
 
 export function PanelAccion({ mensaje, onAccion }: PanelAccionProps) {
   return (
     <div>
       <p>{mensaje}</p>
-      <button type="button" onClick={onAccion}>+1 click</button>
+      <button type="button" onClick={onAccion}>
+        +1 click
+      </button>
     </div>
-  )
+  );
 }
 ```
 
@@ -64,22 +66,24 @@ export function PanelAccion({ mensaje, onAccion }: PanelAccionProps) {
 Crea **`src/components/LayoutIntermedio.tsx`**:
 
 ```tsx
-import { PanelAccion } from './PanelAccion'
+import { PanelAccion } from "./PanelAccion";
 
 type LayoutIntermedioProps = {
-  mensaje: string
-  onAccion: () => void
-}
+  mensaje: string;
+  onAccion: () => void;
+};
 
 export function LayoutIntermedio({ mensaje, onAccion }: LayoutIntermedioProps) {
   return (
-    <section style={{ border: '1px dashed #999', padding: '1rem', marginTop: '1rem' }}>
-      <p style={{ fontSize: '0.85rem', color: '#666' }}>
+    <section
+      style={{ border: "1px dashed #999", padding: "1rem", marginTop: "1rem" }}
+    >
+      <p style={{ fontSize: "0.85rem", color: "#666" }}>
         LayoutIntermedio — solo reenvía props (prop drilling)
       </p>
       <PanelAccion mensaje={mensaje} onAccion={onAccion} />
     </section>
-  )
+  );
 }
 ```
 
@@ -94,26 +98,23 @@ export function LayoutIntermedio({ mensaje, onAccion }: LayoutIntermedioProps) {
 Sustituye **`src/App.tsx`**:
 
 ```tsx
-import { useState } from 'react'
-import { LayoutIntermedio } from './components/LayoutIntermedio'
+import { useState } from "react";
+import { LayoutIntermedio } from "./components/LayoutIntermedio";
 
 function App() {
-  const [total, setTotal] = useState(0)
-  const incrementar = () => setTotal((t) => t + 1)
+  const [total, setTotal] = useState(0);
+  const incrementar = () => setTotal((t) => t + 1);
 
   return (
-    <div style={{ padding: '1rem' }}>
+    <div style={{ padding: "1rem" }}>
       <h1>Prop drilling</h1>
       <p>Total (App): {total}</p>
-      <LayoutIntermedio
-        mensaje={`Clicks: ${total}`}
-        onAccion={incrementar}
-      />
+      <LayoutIntermedio mensaje={`Clicks: ${total}`} onAccion={incrementar} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 **Comprobación:** cada click actualiza el total en `App` y el texto del panel.
@@ -125,7 +126,9 @@ export default App
 **Objetivo:** motivar los labs 7.1+.
 
 1. ¿Cuántos componentes tocaste si mañana añades otro hijo que también necesite `incrementar`?
-2. ¿Qué problema evita Context en este escenario?
+   Necesitaré tocar el nuevo componente, un intermmedio y el app.tsx ya que están acoplados de manera innecesaria
+2. ¿Qué problema evita Context en este escenario?ç
+   Permite compartir datos de manera global sin tener que estar pasandolos por cada nivel de componentes
 
 **Comprobación:** puedes responder en una frase cada pregunta.
 
