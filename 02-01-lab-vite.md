@@ -94,7 +94,7 @@ createRoot(document.getElementById("root")!).render(
 );
 ```
 
-- `getElementById('root')` enlaza con `<motion.div id="root">` en `index.html`.
+- `getElementById('root')` enlaza con `<div id="root">` en `index.html`.
 - `createRoot(...).render(...)` es la API moderna de React 18+.
 
 **Comprobación:** puedes explicar en una frase qué hace `main.tsx` (montar `App` en `#root`).

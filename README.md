@@ -11,9 +11,9 @@ Capacitar para desarrollar aplicaciones SPA básicas con React: componentes, est
 1. Haz **fork** de este repositorio.
 2. Abre un **Codespace** (_Code_ → _Codespaces_ → _Create codespace on main_).
 3. Lee [Requisitos](00-requisitos.md).
-4. Lee cada **capítulo** (teoría) y ejecuta el **lab** enlazado en un proyecto Vite tuyo (el primero se crea en [2.1 Lab Vite](02-01-lab-vite.md)).
+4. Lee cada **capítulo** (teoría) y ejecuta los **labs** enlazados en tu proyecto Vite ([lab 2.1](02-01-lab-vite.md)).
 
-Los laboratorios están en **archivos MD dedicados**: objetivo por paso, comprobaciones y retos. Sigue el orden; no saltes comprobaciones.
+Los laboratorios están en **archivos MD dedicados**: objetivo por paso, comprobaciones y retos.
 
 ## Índice
 
