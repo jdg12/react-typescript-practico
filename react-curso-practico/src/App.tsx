@@ -1,12 +1,17 @@
-import { ThemeProvider } from "./context/ThemeContext";
-import { PanelTema } from "./components/PanelTema";
+import { Boton } from "./components/Boton";
+import { withBorder } from "./hoc/withBorder";
+import { withHover } from "./hoc/withHover";
+
+const BotonConEstilos = withBorder(withHover(Boton));
 
 function App() {
   return (
-    <ThemeProvider>
-      <h1 style={{ padding: "1rem 1rem 0" }}>Tema con Context</h1>
-      <PanelTema />
-    </ThemeProvider>
+    <div style={{ padding: "1rem", display: "flex", gap: "1rem" }}>
+      <Boton onClick={() => alert("Botón normal")}>Normal</Boton>
+      <BotonConEstilos onClick={() => alert("Botón con hover")}>
+        Con hover
+      </BotonConEstilos>
+    </div>
   );
 }
 
