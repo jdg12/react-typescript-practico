@@ -1,16 +1,15 @@
-import { useState } from "react";
-import { Sidebar } from "./components/Sidebar";
+import { LangProvider } from "./context/LangContext";
+import { Layout } from "./components/Layout";
+import SelectLang from "./components/SelectLang";
 
 function App() {
-  const [total, setTotal] = useState(0);
-  const incrementar = () => setTotal((t) => t + 1);
-
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Prop drilling</h1>
-      <p>Total (App): {total}</p>
-      <Sidebar mensaje={`Clicks: ${total}`} onAccion={incrementar} />
-    </div>
+    <LangProvider>
+      <SelectLang></SelectLang>
+      <Layout>
+        <p>Contenido principal de la página.</p>
+      </Layout>
+    </LangProvider>
   );
 }
 
