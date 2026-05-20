@@ -14,11 +14,11 @@ Gestionar un **contador** con **`useReducer`**: acciones tipadas (`incrementar`,
 
 ## Archivos que crearás o modificarás
 
-| Archivo | Acción |
-|---------|--------|
-| `src/reducers/contadorReducer.ts` | Crear |
-| `src/components/ContadorReducer.tsx` | Crear |
-| `src/App.tsx` | Modificar |
+| Archivo                              | Acción    |
+| ------------------------------------ | --------- |
+| `src/reducers/contadorReducer.ts`    | Crear     |
+| `src/components/ContadorReducer.tsx` | Crear     |
+| `src/App.tsx`                        | Modificar |
 
 ## Prerrequisitos
 
@@ -39,32 +39,32 @@ Crea **`src/reducers/contadorReducer.ts`**:
 
 ```tsx
 export type EstadoContador = {
-  valor: number
-}
+  valor: number;
+};
 
 export type AccionContador =
-  | { type: 'incrementar' }
-  | { type: 'decrementar' }
-  | { type: 'reiniciar' }
-  | { type: 'sumar'; payload: number }
+  | { type: "incrementar" }
+  | { type: "decrementar" }
+  | { type: "reiniciar" }
+  | { type: "sumar"; payload: number };
 
-export const estadoInicial: EstadoContador = { valor: 0 }
+export const estadoInicial: EstadoContador = { valor: 0 };
 
 export function contadorReducer(
   estado: EstadoContador,
-  accion: AccionContador
+  accion: AccionContador,
 ): EstadoContador {
   switch (accion.type) {
-    case 'incrementar':
-      return { valor: estado.valor + 1 }
-    case 'decrementar':
-      return { valor: estado.valor - 1 }
-    case 'reiniciar':
-      return { valor: 0 }
-    case 'sumar':
-      return { valor: estado.valor + accion.payload }
+    case "incrementar":
+      return { valor: estado.valor + 1 };
+    case "decrementar":
+      return { valor: estado.valor - 1 };
+    case "reiniciar":
+      return { valor: 0 };
+    case "sumar":
+      return { valor: estado.valor + accion.payload };
     default:
-      return estado
+      return estado;
   }
 }
 ```
@@ -80,27 +80,44 @@ export function contadorReducer(
 Crea **`src/components/ContadorReducer.tsx`**:
 
 ```tsx
-import { useReducer } from 'react'
+import { useReducer } from "react";
 import {
   contadorReducer,
   estadoInicial,
   type AccionContador,
-} from '../reducers/contadorReducer'
+} from "../reducers/contadorReducer";
 
 export function ContadorReducer() {
-  const [estado, dispatch] = useReducer(contadorReducer, estadoInicial)
+  const [estado, dispatch] = useReducer(contadorReducer, estadoInicial);
 
-  const enviar = (accion: AccionContador) => () => dispatch(accion)
+  const enviar = (accion: AccionContador) => () => dispatch(accion);
 
   return (
-    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
-      <button type="button" onClick={enviar({ type: 'decrementar' })}>−1</button>
-      <strong style={{ minWidth: '3rem', textAlign: 'center' }}>{estado.valor}</strong>
-      <button type="button" onClick={enviar({ type: 'incrementar' })}>+1</button>
-      <button type="button" onClick={enviar({ type: 'sumar', payload: 5 })}>+5</button>
-      <button type="button" onClick={enviar({ type: 'reiniciar' })}>Reset</button>
+    <div
+      style={{
+        display: "flex",
+        gap: "0.5rem",
+        alignItems: "center",
+        flexWrap: "wrap",
+      }}
+    >
+      <button type="button" onClick={enviar({ type: "decrementar" })}>
+        −1
+      </button>
+      <strong style={{ minWidth: "3rem", textAlign: "center" }}>
+        {estado.valor}
+      </strong>
+      <button type="button" onClick={enviar({ type: "incrementar" })}>
+        +1
+      </button>
+      <button type="button" onClick={enviar({ type: "sumar", payload: 5 })}>
+        +5
+      </button>
+      <button type="button" onClick={enviar({ type: "reiniciar" })}>
+        Reset
+      </button>
     </div>
-  )
+  );
 }
 ```
 
@@ -115,18 +132,18 @@ export function ContadorReducer() {
 Sustituye **`src/App.tsx`**:
 
 ```tsx
-import { ContadorReducer } from './components/ContadorReducer'
+import { ContadorReducer } from "./components/ContadorReducer";
 
 function App() {
   return (
-    <div style={{ padding: '1rem' }}>
+    <div style={{ padding: "1rem" }}>
       <h1>useReducer</h1>
       <ContadorReducer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 **Comprobación:** secuencia +1, +5, −1, Reset deja el valor en 0.
@@ -139,8 +156,8 @@ export default App
 
 Responde por escrito (en tu cuaderno):
 
-1. ¿Cuántos `useState` necesitarías sin reducer para las mismas reglas?
-2. ¿Dónde centralizaste la lógica al usar `useReducer`?
+1. ¿Cuántos `useState` necesitarías sin reducer para las mismas reglas Necesitaría 3 useState.
+2. ¿Dónde centralizaste la lógica al usar `useReducer`? En el propio reducer
 
 **Comprobación:** has localizado el archivo `contadorReducer.ts` como única fuente de verdad de transiciones.
 
@@ -153,7 +170,7 @@ Responde por escrito (en tu cuaderno):
 En `contadorReducer`, caso `decrementar`:
 
 ```tsx
-return { valor: Math.max(0, estado.valor - 1) }
+return { valor: Math.max(0, estado.valor - 1) };
 ```
 
 **Comprobación:** el valor no baja de 0.
@@ -162,21 +179,21 @@ return { valor: Math.max(0, estado.valor - 1) }
 
 ## Si algo falla
 
-| Síntoma | Qué revisar |
-|---------|-------------|
-| El número no cambia | ¿Llamas a `dispatch` con `{ type: '...' }`? |
+| Síntoma                      | Qué revisar                                              |
+| ---------------------------- | -------------------------------------------------------- |
+| El número no cambia          | ¿Llamas a `dispatch` con `{ type: '...' }`?              |
 | Error de tipos en `dispatch` | `AccionContador` debe incluir todas las acciones usadas. |
-| `payload` undefined | Acción `sumar` requiere `payload: number`. |
+| `payload` undefined          | Acción `sumar` requiere `payload: number`.               |
 
 ---
 
 ## Retos
 
-| Reto | Criterio de éxito |
-|------|-------------------|
-| A | Acción `establecer` con `payload: number` y un input numérico controlado. | El input fija el valor vía reducer. |
-| B | Muestra historial de las últimas 3 acciones (`string[]` en el estado). | Lista debajo del contador. |
-| C | Refactor: extrae `useContador()` que devuelva `{ valor, incrementar, ... }` usando el mismo reducer. | API más cómoda para la UI. |
+| Reto | Criterio de éxito                                                                                    |
+| ---- | ---------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| A    | Acción `establecer` con `payload: number` y un input numérico controlado.                            | El input fija el valor vía reducer. |
+| B    | Muestra historial de las últimas 3 acciones (`string[]` en el estado).                               | Lista debajo del contador.          |
+| C    | Refactor: extrae `useContador()` que devuelva `{ valor, incrementar, ... }` usando el mismo reducer. | API más cómoda para la UI.          |
 
 ---
 

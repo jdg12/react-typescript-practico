@@ -1,25 +1,11 @@
-import { withData } from "./hoc/withData";
-import { InfoUsuario } from "./components/InfoUsuario";
-import { withDataLista } from "./hoc/withDataList";
-import { ListaUsuarios } from "./components/ListaUsuarios";
-
-const InfoUsuarioConDatos = withData(
-  InfoUsuario,
-  "https://jsonplaceholder.typicode.com/users/1",
-);
-const ListaConDatos = withDataLista(
-  ListaUsuarios,
-  "https://jsonplaceholder.typicode.com/users",
-);
+import { ContadorReducer } from "./components/ContadorReducer";
 
 function App() {
   return (
     <div style={{ padding: "1rem" }}>
-      <h1>HOC withData</h1>
-      <InfoUsuarioConDatos />
-      <ListaConDatos />
+      <h1>useReducer</h1>
+      <ContadorReducer />
     </div>
   );
 }
-
 export default App;
