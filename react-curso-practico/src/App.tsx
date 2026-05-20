@@ -1,16 +1,23 @@
-import { Boton } from "./components/Boton";
-import { withBorder } from "./hoc/withBorder";
-import { withHover } from "./hoc/withHover";
+import { withData } from "./hoc/withData";
+import { InfoUsuario } from "./components/InfoUsuario";
+import { withDataLista } from "./hoc/withDataList";
+import { ListaUsuarios } from "./components/ListaUsuarios";
 
-const BotonConEstilos = withBorder(withHover(Boton));
+const InfoUsuarioConDatos = withData(
+  InfoUsuario,
+  "https://jsonplaceholder.typicode.com/users/1",
+);
+const ListaConDatos = withDataLista(
+  ListaUsuarios,
+  "https://jsonplaceholder.typicode.com/users",
+);
 
 function App() {
   return (
-    <div style={{ padding: "1rem", display: "flex", gap: "1rem" }}>
-      <Boton onClick={() => alert("Botón normal")}>Normal</Boton>
-      <BotonConEstilos onClick={() => alert("Botón con hover")}>
-        Con hover
-      </BotonConEstilos>
+    <div style={{ padding: "1rem" }}>
+      <h1>HOC withData</h1>
+      <InfoUsuarioConDatos />
+      <ListaConDatos />
     </div>
   );
 }
