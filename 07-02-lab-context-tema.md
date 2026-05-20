@@ -14,11 +14,11 @@ Compartir **estilos de tema** (claro u oscuro) con **Context** y `useContext`, s
 
 ## Archivos
 
-| Archivo | Acción |
-|---------|--------|
-| `src/context/ThemeContext.tsx` | Crear |
-| `src/components/PanelTema.tsx` | Crear |
-| `src/App.tsx` | Modificar |
+| Archivo                        | Acción    |
+| ------------------------------ | --------- |
+| `src/context/ThemeContext.tsx` | Crear     |
+| `src/components/PanelTema.tsx` | Crear     |
+| `src/App.tsx`                  | Modificar |
 
 ## Prerrequisitos
 
@@ -44,48 +44,62 @@ import {
   useState,
   type CSSProperties,
   type ReactNode,
-} from 'react'
+} from "react";
 
-export type ModoTema = 'claro' | 'oscuro'
+export type ModoTema = "claro" | "oscuro";
 
 const estilosPorModo: Record<ModoTema, CSSProperties> = {
-  claro: { backgroundColor: '#fff', color: '#111', minHeight: '120px', padding: '1rem' },
-  oscuro: { backgroundColor: '#1a1a1a', color: '#f5f5f5', minHeight: '120px', padding: '1rem' },
-}
+  claro: {
+    backgroundColor: "#fff",
+    color: "#111",
+    minHeight: "120px",
+    padding: "1rem",
+  },
+  oscuro: {
+    backgroundColor: "#1a1a1a",
+    color: "#f5f5f5",
+    minHeight: "120px",
+    padding: "1rem",
+  },
+};
 
 type ThemeContextValue = {
-  modo: ModoTema
-  estilos: CSSProperties
-  alternar: () => void
-}
+  modo: ModoTema;
+  estilos: CSSProperties;
+  alternar: () => void;
+};
 
-export const ThemeContext = createContext<ThemeContextValue | null>(null)
+export const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [modo, setModo] = useState<ModoTema>('claro')
+  const [modo, setModo] = useState<ModoTema>("claro");
 
   const value: ThemeContextValue = {
     modo,
     estilos: estilosPorModo[modo],
-    alternar: () => setModo((m) => (m === 'claro' ? 'oscuro' : 'claro')),
-  }
+    alternar: () => setModo((m) => (m === "claro" ? "oscuro" : "claro")),
+  };
 
   return (
     <ThemeContext.Provider value={value}>
       <div>
-        <button type="button" onClick={value.alternar} style={{ marginBottom: '1rem' }}>
+        <button
+          type="button"
+          onClick={value.alternar}
+          style={{ marginBottom: "1rem" }}
+        >
           Tema: {modo} (clic para cambiar)
         </button>
         {children}
       </div>
     </ThemeContext.Provider>
-  )
+  );
 }
 
 export function useTheme() {
-  const ctx = useContext(ThemeContext)
-  if (!ctx) throw new Error('useTheme debe usarse dentro de ThemeProvider')
-  return ctx
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error("useTheme debe usarse dentro de ThemeProvider");
+  return ctx;
 }
 ```
 
@@ -100,18 +114,20 @@ export function useTheme() {
 Crea **`src/components/PanelTema.tsx`**:
 
 ```tsx
-import { useTheme } from '../context/ThemeContext'
+import { useTheme } from "../context/ThemeContext";
 
 export function PanelTema() {
-  const { estilos, modo } = useTheme()
+  const { estilos, modo } = useTheme();
 
   return (
     <section style={estilos}>
       <h2>Panel con tema</h2>
-      <p>Modo actual: <strong>{modo}</strong></p>
+      <p>
+        Modo actual: <strong>{modo}</strong>
+      </p>
       <p>Este bloque no recibe estilos por props.</p>
     </section>
-  )
+  );
 }
 ```
 
@@ -126,19 +142,19 @@ export function PanelTema() {
 Sustituye **`src/App.tsx`**:
 
 ```tsx
-import { ThemeProvider } from './context/ThemeContext'
-import { PanelTema } from './components/PanelTema'
+import { ThemeProvider } from "./context/ThemeContext";
+import { PanelTema } from "./components/PanelTema";
 
 function App() {
   return (
     <ThemeProvider>
-      <h1 style={{ padding: '1rem 1rem 0' }}>Tema con Context</h1>
+      <h1 style={{ padding: "1rem 1rem 0" }}>Tema con Context</h1>
       <PanelTema />
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 **Comprobación:** al pulsar el botón de tema, cambian fondo y texto del panel.
@@ -150,6 +166,7 @@ export default App
 **Objetivo:** enlazar con el lab 7.0.
 
 ¿Cómo pasarías `estilos` sin Context? Describe en una frase.
+Tendría que pasarlos como props desed App hasta PanelTema.tsx
 
 **Comprobación:** mencionas reenvío por `Layout`, `Sidebar`, etc.
 
@@ -157,21 +174,21 @@ export default App
 
 ## Si algo falla
 
-| Síntoma | Qué revisar |
-|---------|-------------|
-| Panel no cambia | `PanelTema` dentro de `<ThemeProvider>`. |
-| Error en `useTheme` | Provider montado en `App`. |
-| Botón no alterna | `alternar` en el `value` del contexto. |
+| Síntoma             | Qué revisar                              |
+| ------------------- | ---------------------------------------- |
+| Panel no cambia     | `PanelTema` dentro de `<ThemeProvider>`. |
+| Error en `useTheme` | Provider montado en `App`.               |
+| Botón no alterna    | `alternar` en el `value` del contexto.   |
 
 ---
 
 ## Retos
 
-| Reto | Criterio |
-|------|----------|
-| A | Persiste `modo` en `localStorage` y restáuralo al recargar. | Tema se mantiene tras F5. |
-| B | Añade `LayoutTema` intermedio sin props de estilo; solo envuelve hijos. | Sigue funcionando. |
-| C | En 7.7 unificarás `useLang` y `useTheme` en hooks reutilizables. | — |
+| Reto | Criterio                                                                |
+| ---- | ----------------------------------------------------------------------- | ------------------------- |
+| A    | Persiste `modo` en `localStorage` y restáuralo al recargar.             | Tema se mantiene tras F5. |
+| B    | Añade `LayoutTema` intermedio sin props de estilo; solo envuelve hijos. | Sigue funcionando.        |
+| C    | En 7.7 unificarás `useLang` y `useTheme` en hooks reutilizables.        | —                         |
 
 ---
 

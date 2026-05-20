@@ -1,15 +1,12 @@
-import { LangProvider } from "./context/LangContext";
-import { Layout } from "./components/Layout";
-import SelectLang from "./components/SelectLang";
+import { ThemeProvider } from "./context/ThemeContext";
+import { PanelTema } from "./components/PanelTema";
 
 function App() {
   return (
-    <LangProvider>
-      <SelectLang></SelectLang>
-      <Layout>
-        <p>Contenido principal de la página.</p>
-      </Layout>
-    </LangProvider>
+    <ThemeProvider>
+      <h1 style={{ padding: "1rem 1rem 0" }}>Tema con Context</h1>
+      <PanelTema />
+    </ThemeProvider>
   );
 }
 
